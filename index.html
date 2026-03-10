@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Launch Local — Websites for Local Businesses</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+:root {
+–cream: #f7f4ef;
+–paper: #faf8f4;
+–ink: #1a1814;
+–mid: #6b6560;
+–light: #b0aba4;
+–rule: #e2ded8;
+–blue: #1d4ed8;
+–blue-light: #eff6ff;
+–dark: #0f0d0a;
+–serif: ‘Instrument Serif’, Georgia, serif;
+–sans: ‘Geist’, system-ui, sans-serif;
+}
+
+body { background: var(–dark); color: var(–ink); font-family: var(–sans); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+.hero-section-wrap { background: var(–dark); }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0 48px; height: 60px; display: flex; align-items: center; justify-content: space-between; background: rgba(250,248,244,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(–rule); }
+.nav-logo { font-family: var(–serif); font-size: 20px; color: var(–ink); text-decoration: none; }
+.nav-logo em { font-style: italic; color: var(–blue); }
+.nav-links { display: flex; align-items: center; gap: 36px; }
+.nav-links a { font-size: 13px; font-weight: 500; color: var(–mid); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover { color: var(–ink); }
+.nav-cta { font-size: 13px; font-weight: 600; color: var(–blue); text-decoration: none; border-bottom: 1px solid var(–blue); padding-bottom: 1px; }
+.nav-cta:hover { opacity: 0.7; }
+
+/* HERO */
+.hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 100px 48px 80px; gap: 64px; max-width: 1200px; margin: 0 auto; }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 28px; }
+.hero-eyebrow::before { content: ‘’; display: inline-block; width: 24px; height: 1px; background: rgba(255,255,255,0.4); }
+.hero h1 { font-family: var(–serif); font-size: clamp(40px, 5.5vw, 68px); font-weight: 400; line-height: 1.08; letter-spacing: -1.5px; color: #ffffff; margin-bottom: 24px; }
+.hero h1 em { font-style: italic; color: rgba(255,255,255,0.55); }
+.hero-sub { font-size: 16px; color: rgba(255,255,255,0.55); line-height: 1.75; max-width: 400px; margin-bottom: 40px; font-weight: 300; }
+.hero-actions { display: flex; align-items: center; gap: 24px; }
+.btn-main { background: var(–ink); color: #fff; padding: 14px 28px; border-radius: 4px; font-family: var(–sans); font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.15s, transform 0.15s; }
+.btn-main:hover { background: var(–blue); transform: translateY(-1px); }
+.btn-text { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.5); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.15s; }
+.btn-text:hover { color: #fff; }
+.btn-text::after { content: ‘→’; transition: transform 0.15s; }
+.btn-text:hover::after { transform: translateX(3px); }
+.hero-photo { position: relative; border-radius: 8px; overflow: hidden; height: 520px; }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+.hero-photo-badge { position: absolute; bottom: 20px; left: 20px; background: rgba(15,13,10,0.85); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 12px 16px; display: flex; align-items: center; gap: 10px; }
+.badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.badge-text { font-size: 13px; font-weight: 600; color: #fff; }
+.badge-sub { font-size: 11px; color: rgba(255,255,255,0.45); margin-top: 1px; }
+
+/* PROOF BAR */
+.proof-bar { border-top: 1px solid rgba(255,255,255,0.07); background: #0f0d0a; padding: 20px 48px; display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+.proof-label { font-family: var(–serif); font-size: 13px; color: rgba(255,255,255,0.3); letter-spacing: 0.5px; flex-shrink: 0; }
+.proof-divider { width: 1px; height: 14px; background: rgba(255,255,255,0.1); flex-shrink: 0; }
+.proof-item { font-size: 13px; color: rgba(255,255,255,0.45); }
+
+/* DARK SECTIONS */
+.dark-section { background: var(–dark); padding: 100px 48px; }
+.dark-inner { max-width: 1200px; margin: 0 auto; }
+.dark-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 64px; padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.dark-num { font-family: var(–serif); font-size: 13px; color: rgba(255,255,255,0.3); letter-spacing: 1px; }
+.dark-title { font-family: var(–serif); font-size: clamp(28px, 3.5vw, 44px); font-weight: 400; letter-spacing: -1px; line-height: 1.15; color: #ffffff; }
+.dark-title em { font-style: italic; color: rgba(255,255,255,0.4); }
+.dark-link { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.5); text-decoration: none; white-space: nowrap; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 2px; }
+.dark-link:hover { color: #fff; }
+
+/* LIGHT SECTIONS */
+.light-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 64px; padding-bottom: 32px; border-bottom: 1px solid var(–rule); }
+.light-num { font-family: var(–serif); font-size: 13px; color: var(–light); letter-spacing: 1px; }
+.light-title { font-family: var(–serif); font-size: clamp(28px, 3.5vw, 44px); font-weight: 400; letter-spacing: -1px; line-height: 1.15; color: var(–ink); }
+.light-title em { font-style: italic; color: var(–blue); }
+.light-link { font-size: 13px; font-weight: 500; color: var(–blue); text-decoration: none; border-bottom: 1px solid rgba(29,78,216,0.3); padding-bottom: 2px; }
+
+/* HOW IT WORKS */
+.steps-list { display: flex; flex-direction: column; }
+.step-row { display: grid; grid-template-columns: 80px 1fr 1fr; gap: 40px; align-items: start; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.step-row:last-child { border-bottom: none; }
+.step-n { font-family: var(–serif); font-size: 48px; font-weight: 400; color: rgba(255,255,255,0.08); line-height: 1; letter-spacing: -2px; padding-top: 4px; }
+.step-title { font-family: var(–serif); font-size: 22px; font-weight: 400; color: #fff; letter-spacing: -0.5px; line-height: 1.3; }
+.step-sub { font-size: 13px; color: rgba(255,255,255,0.38); margin-top: 6px; line-height: 1.6; }
+.step-detail { font-size: 14px; color: rgba(255,255,255,0.38); line-height: 1.7; padding-top: 4px; }
+.step-tag { display: inline-block; margin-top: 12px; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.12); border-radius: 3px; padding: 3px 8px; }
+
+/* WHAT WE BUILD */
+.build-section { background: var(–cream); border-top: 1px solid var(–rule); border-bottom: 1px solid var(–rule); padding: 100px 48px; }
+.build-inner { max-width: 1200px; margin: 0 auto; }
+.build-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(–rule); border: 1px solid var(–rule); border-radius: 8px; overflow: hidden; }
+.build-card { background: var(–paper); padding: 0 0 32px; transition: background 0.2s; }
+.build-card:hover { background: #fff; }
+.build-img { width: 100%; height: 200px; object-fit: cover; display: block; filter: grayscale(15%); transition: filter 0.3s; }
+.build-card:hover .build-img { filter: grayscale(0%); }
+.build-body { padding: 24px 28px 0; }
+.build-type { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(–light); margin-bottom: 8px; }
+.build-name { font-family: var(–serif); font-size: 20px; color: var(–ink); letter-spacing: -0.5px; margin-bottom: 8px; }
+.build-desc { font-size: 13px; color: var(–mid); line-height: 1.65; }
+.build-status { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-size: 11px; font-weight: 600; color: var(–blue); letter-spacing: 0.5px; }
+.build-status::before { content: ‘’; width: 6px; height: 6px; border-radius: 50%; background: var(–blue); animation: blink 2s infinite; }
+.founding-strip { margin-top: 28px; padding: 28px 36px; border: 1px solid rgba(29,78,216,0.2); border-radius: 6px; background: var(–blue-light); display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.founding-text h3 { font-family: var(–serif); font-size: 20px; color: var(–ink); letter-spacing: -0.5px; margin-bottom: 4px; }
+.founding-text p { font-size: 13px; color: var(–mid); }
+
+/* PRICING */
+.pricing-section { background: var(–dark); padding: 100px 48px; }
+.pricing-inner { max-width: 1200px; margin: 0 auto; }
+.pricing-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; overflow: hidden; margin-top: 56px; }
+.price-card { background: #161411; padding: 40px 32px; }
+.price-card.featured { background: #fff; }
+.price-tier { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 24px; }
+.price-card.featured .price-tier { color: var(–light); }
+.price-amount { font-family: var(–serif); font-size: 56px; font-weight: 400; letter-spacing: -2px; line-height: 1; color: #fff; margin-bottom: 4px; }
+.price-card.featured .price-amount { color: var(–ink); }
+.price-amount sup { font-size: 24px; vertical-align: top; margin-top: 10px; }
+.price-period { font-size: 13px; color: rgba(255,255,255,0.3); margin-bottom: 20px; }
+.price-card.featured .price-period { color: var(–light); }
+.price-desc { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.65; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.price-card.featured .price-desc { color: var(–mid); border-bottom-color: var(–rule); }
+.price-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+.price-features li { font-size: 13px; color: rgba(255,255,255,0.45); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+.price-card.featured .price-features li { color: var(–mid); }
+.price-features li::before { content: ‘—’; color: rgba(255,255,255,0.2); flex-shrink: 0; }
+.price-card.featured .price-features li::before { color: var(–blue); }
+.price-btn { display: block; text-align: center; padding: 13px 20px; border-radius: 4px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.15s; font-family: var(–sans); }
+.price-btn-outline { background: transparent; color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.12); }
+.price-btn-outline:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+.price-btn-dark { background: var(–ink); color: #fff; }
+.price-btn-dark:hover { background: var(–blue); }
+.price-domain-note { font-size: 11px; color: rgba(255,255,255,0.25); margin-top: 12px; text-align: center; }
+.price-domain-note-dark { color: var(–light); }
+
+/* WHY US */
+.why-section { background: var(–paper); border-top: 1px solid var(–rule); padding: 100px 48px; }
+.why-inner { max-width: 1200px; margin: 0 auto; }
+.why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 48px; margin-top: 56px; }
+.why-icon { font-size: 28px; margin-bottom: 16px; }
+.why-title { font-family: var(–serif); font-size: 19px; color: var(–ink); letter-spacing: -0.3px; margin-bottom: 10px; }
+.why-text { font-size: 13px; color: var(–mid); line-height: 1.75; }
+
+/* FAQ */
+.faq-section { padding: 100px 48px; background: var(–dark); }
+.faq-inner { max-width: 800px; margin: 0 auto; }
+.faq-list { margin-top: 48px; }
+.faq-item { border-top: 1px solid rgba(255,255,255,0.07); padding: 24px 0; }
+.faq-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.07); }
+.faq-q { font-family: var(–serif); font-size: 18px; color: #fff; letter-spacing: -0.3px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; gap: 20px; }
+.faq-icon { width: 24px; height: 24px; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; color: rgba(255,255,255,0.5); transition: transform 0.2s, background 0.2s; }
+.faq-item.open .faq-icon { transform: rotate(45deg); background: #fff; color: var(–ink); border-color: #fff; }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s; font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.75; }
+.faq-item.open .faq-a { max-height: 200px; padding-top: 16px; }
+
+/* CONTACT */
+.contact-section { background: var(–blue); padding: 100px 48px; text-align: center; }
+.contact-inner { max-width: 600px; margin: 0 auto; }
+.contact-tag { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 20px; }
+.contact-section h2 { font-family: var(–serif); font-size: clamp(32px, 4.5vw, 54px); font-weight: 400; letter-spacing: -1.5px; color: #fff; margin-bottom: 16px; line-height: 1.1; }
+.contact-section h2 em { font-style: italic; color: rgba(255,255,255,0.5); }
+.contact-sub { font-size: 15px; color: rgba(255,255,255,0.55); margin-bottom: 44px; line-height: 1.6; }
+.contact-row { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 32px; }
+.contact-btn { padding: 14px 28px; border-radius: 4px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.15s; font-family: var(–sans); }
+.contact-btn-white { background: #fff; color: var(–blue); }
+.contact-btn-white:hover { background: var(–ink); color: #fff; }
+.contact-btn-ghost { background: transparent; color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.25); }
+.contact-btn-ghost:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+.contact-info { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.8; }
+.contact-info a { color: rgba(255,255,255,0.6); text-decoration: none; }
+.contact-info a:hover { color: #fff; }
+
+/* FOOTER */
+footer { padding: 28px 48px; border-top: 1px solid var(–rule); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.footer-logo { font-family: var(–serif); font-size: 16px; color: var(–mid); }
+.footer-logo em { font-style: italic; color: var(–blue); }
+footer p { font-size: 12px; color: var(–light); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 12px; color: var(–light); text-decoration: none; }
+.footer-links a:hover { color: var(–mid); }
+
+/* REVEAL */
+.reveal { opacity: 1; transform: none; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* MOBILE */
+@media (max-width: 768px) {
+nav { padding: 0 20px; }
+.nav-links { display: none; }
+.hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 40px; }
+.hero-photo { height: 280px; }
+.dark-section, .build-section, .why-section, .faq-section, .contact-section, .pricing-section { padding: 72px 24px; }
+.proof-bar { padding: 16px 24px; gap: 20px; }
+.step-row { grid-template-columns: 48px 1fr; }
+.step-detail { display: none; }
+.build-grid, .pricing-grid, .why-grid { grid-template-columns: 1fr; }
+.dark-header, .light-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+footer { padding: 24px; flex-direction: column; align-items: flex-start; }
+}
+</style>
+
+</head>
+<body>
+
+<nav>
+<a href="#" class="nav-logo">Launch<em>Local</em></a>
+<div class="nav-links">
+<a href="#how">Process</a>
+<a href="#work">Work</a>
+<a href="#pricing">Pricing</a>
+<a href="#faq">FAQ</a>
+</div>
+<a href="#contact" class="nav-cta">Get in touch →</a>
+</nav>
+
+<div style="background:#0f0d0a">
+<section class="hero">
+<div class="hero-left reveal">
+<div class="hero-eyebrow">Local Business Websites</div>
+<h1>Your business,<br/><em>found online.</em></h1>
+<p class="hero-sub">We build clean, professional websites for local businesses that have none. Live in 7 days. No monthly fees. No tech skills needed from you.</p>
+<div class="hero-actions">
+<a href="#contact" class="btn-main">Get your site →</a>
+<a href="#how" class="btn-text">See how it works</a>
+</div>
+</div>
+<div class="hero-photo reveal">
+<img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80" alt="Local business" onerror="this.src='https://picsum.photos/seed/business/800/520'"/>
+<div class="hero-photo-badge">
+<div class="badge-dot"></div>
+<div>
+<div class="badge-text">Now taking clients</div>
+<div class="badge-sub">First 3 get 20% off</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<div class="proof-bar">
+<span class="proof-label">Serving</span>
+<span class="proof-divider"></span>
+<span class="proof-item">Norwalk</span>
+<span class="proof-divider"></span>
+<span class="proof-item">Trumbull</span>
+<span class="proof-divider"></span>
+<span class="proof-item">Westport</span>
+<span class="proof-divider"></span>
+<span class="proof-item">Fairfield</span>
+<span class="proof-divider"></span>
+<span class="proof-item">Bridgeport</span>
+</div>
+
+<section class="dark-section" id="how">
+<div class="dark-inner">
+<div class="dark-header reveal">
+<div>
+<div class="dark-num">01 — Process</div>
+<h2 class="dark-title">How it works.</h2>
+</div>
+<a href="#contact" class="dark-link">Start today →</a>
+</div>
+<div class="steps-list">
+<div class="step-row reveal">
+<div class="step-n">01</div>
+<div>
+<div class="step-title">Quick conversation</div>
+<div class="step-sub">5 minutes. That's all we need.</div>
+<span class="step-tag">Day 1</span>
+</div>
+<div class="step-detail">Tell us your business name, hours, services, and send over any photos — even iPhone shots from Instagram work great. We write all the copy for you.</div>
+</div>
+<div class="step-row reveal">
+<div class="step-n">02</div>
+<div>
+<div class="step-title">We build it</div>
+<div class="step-sub">You don't touch a thing.</div>
+<span class="step-tag">Days 2–5</span>
+</div>
+<div class="step-detail">We design and build your full website — mobile-friendly, fast, built to look trustworthy. You get a preview before anything goes live.</div>
+</div>
+<div class="step-row reveal">
+<div class="step-n">03</div>
+<div>
+<div class="step-title">Go live</div>
+<div class="step-sub">Real domain. Real URL.</div>
+<span class="step-tag">Day 6–7</span>
+</div>
+<div class="step-detail">We connect your custom domain and launch the site. We also set up your Google Business Profile so you show up on Google Maps — included with every build.</div>
+</div>
+<div class="step-row reveal">
+<div class="step-n">04</div>
+<div>
+<div class="step-title">We keep it updated</div>
+<div class="step-sub">Optional — $35/month.</div>
+<span class="step-tag">Ongoing</span>
+</div>
+<div class="step-detail">Hours changed? New special? Just text us. We update the site same day. You deal with the person who built your site — not a ticket system.</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="build-section" id="work">
+<div class="build-inner">
+<div class="light-header reveal">
+<div>
+<div class="light-num">02 — Work</div>
+<h2 class="light-title">What we <em>build.</em></h2>
+</div>
+</div>
+<div class="build-grid">
+<div class="build-card reveal">
+<img class="build-img" src="https://images.unsplash.com/photo-1521490683712-35a1cb235d1c?auto=format&fit=crop&w=600&q=80" alt="Barbershop" onerror="this.src='https://picsum.photos/seed/barber/600/200'"/>
+<div class="build-body">
+<div class="build-type">Barbershops & Salons</div>
+<div class="build-name">Look the part online</div>
+<div class="build-desc">Hours, services, booking button, photo gallery. Customers know exactly what to expect before they walk in.</div>
+<div class="build-status">Now taking clients</div>
+</div>
+</div>
+<div class="build-card reveal">
+<img class="build-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Restaurant" onerror="this.src='https://picsum.photos/seed/restaurant/600/200'"/>
+<div class="build-body">
+<div class="build-type">Restaurants & Delis</div>
+<div class="build-name">More tables filled</div>
+<div class="build-desc">Menu, hours, location, contact. When someone searches for food nearby — your name comes up instead of nothing.</div>
+<div class="build-status">Now taking clients</div>
+</div>
+</div>
+<div class="build-card reveal">
+<img class="build-img" src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80" alt="Local shop" onerror="this.src='https://picsum.photos/seed/market/600/200'"/>
+<div class="build-body">
+<div class="build-type">Shops & Markets</div>
+<div class="build-name">Turn searches into visits</div>
+<div class="build-desc">Products, hours, directions, contact form. Every local business deserves a home online.</div>
+<div class="build-status">Now taking clients</div>
+</div>
+</div>
+</div>
+<div class="founding-strip reveal">
+<div class="founding-text">
+<h3>We're just getting started — be a founding client.</h3>
+<p>First 3 clients lock in 20% off permanently.</p>
+</div>
+<a href="#contact" class="btn-main">Claim your spot →</a>
+</div>
+</div>
+</section>
+
+<section class="pricing-section" id="pricing">
+<div class="pricing-inner">
+<div class="dark-header reveal">
+<div>
+<div class="dark-num">03 — Pricing</div>
+<h2 class="dark-title">Simple pricing,<br/><em>no surprises.</em></h2>
+</div>
+<a href="#contact" class="dark-link">Get a quote →</a>
+</div>
+<div class="pricing-grid">
+<div class="price-card reveal">
+<div class="price-tier">Starter</div>
+<div class="price-amount"><sup>$</sup>150</div>
+<div class="price-period">one-time payment</div>
+<div class="price-desc">For businesses that just need to get online. Clean, simple, live fast.</div>
+<ul class="price-features">
+<li>3-page site — Home, Services, Contact</li>
+<li>Mobile-friendly design</li>
+<li>Phone & address on every page</li>
+<li>Google Maps embed</li>
+<li>Live within 7 days</li>
+</ul>
+<a href="#contact" class="price-btn price-btn-outline">Get started</a>
+<p class="price-domain-note">+ ~$12/yr for custom domain (optional)</p>
+</div>
+<div class="price-card featured reveal">
+<div class="price-tier">Standard</div>
+<div class="price-amount"><sup>$</sup>225</div>
+<div class="price-period">one-time payment</div>
+<div class="price-desc">Everything you need to look professional and get found on Google.</div>
+<ul class="price-features">
+<li>5-page site with photo gallery</li>
+<li>Google Business setup</li>
+<li>Booking button integration</li>
+<li>Basic SEO included</li>
+<li>1 month of free updates</li>
+</ul>
+<a href="#contact" class="price-btn price-btn-dark">Get started →</a>
+<p class="price-domain-note price-domain-note-dark">+ ~$12/yr for custom domain (optional)</p>
+</div>
+<div class="price-card reveal">
+<div class="price-tier">Monthly Updates</div>
+<div class="price-amount"><sup>$</sup>35</div>
+<div class="price-period">per month, cancel anytime</div>
+<div class="price-desc">We keep your site current. Text us a change, it's done same day.</div>
+<ul class="price-features">
+<li>Unlimited small edits</li>
+<li>Update hours, prices, photos</li>
+<li>Same-day turnaround</li>
+<li>Direct text communication</li>
+<li>No contracts</li>
+</ul>
+<a href="#contact" class="price-btn price-btn-outline">Add on</a>
+</div>
+</div>
+</div>
+</section>
+
+<section class="why-section">
+<div class="why-inner">
+<div class="light-header reveal">
+<div>
+<div class="light-num">04 — Why us</div>
+<h2 class="light-title">Built <em>different.</em></h2>
+</div>
+</div>
+<div class="why-grid">
+<div class="why-card reveal">
+<div class="why-icon">⚡</div>
+<div class="why-title">Done in a week</div>
+<div class="why-text">Agencies take months and charge thousands. We use modern tools to build fast without cutting corners — you're live in 7 days or less.</div>
+</div>
+<div class="why-card reveal">
+<div class="why-icon">💬</div>
+<div class="why-title">One person, direct line</div>
+<div class="why-text">You deal with the person who built your site. Not a ticket system. Not a support team. Just text us and it gets done.</div>
+</div>
+<div class="why-card reveal">
+<div class="why-icon">📍</div>
+<div class="why-title">Local & affordable</div>
+<div class="why-text">We're a small local operation. Lower overhead means lower prices — and we actually understand your community and your customers.</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="faq-section" id="faq">
+<div class="faq-inner">
+<div class="dark-header reveal">
+<div>
+<div class="dark-num">05 — FAQ</div>
+<h2 class="dark-title">Questions.</h2>
+</div>
+</div>
+<div class="faq-list">
+<div class="faq-item reveal">
+<div class="faq-q">Do I need to know anything about websites? <span class="faq-icon">+</span></div>
+<div class="faq-a">Not at all. You tell us about your business — hours, services, photos. We handle everything. You don't write a line of code or touch any settings.</div>
+</div>
+<div class="faq-item reveal">
+<div class="faq-q">How long does it actually take? <span class="faq-icon">+</span></div>
+<div class="faq-a">Most sites are live within 5–7 days. You'll get a preview before it goes live so you can ask for changes. We don't launch anything you haven't approved.</div>
+</div>
+<div class="faq-item reveal">
+<div class="faq-q">What do I need to give you? <span class="faq-icon">+</span></div>
+<div class="faq-a">Business name, address, phone, hours, services, and any photos. Even iPhone shots from your Instagram work. We write all the text — you just review it.</div>
+</div>
+<div class="faq-item reveal">
+<div class="faq-q">Is there a monthly fee? <span class="faq-icon">+</span></div>
+<div class="faq-a">No required monthly fee. You pay once and own the site. The only ongoing cost is your domain (~$12/year) if you want a custom URL like yourbusiness.com — totally optional but recommended. The $35/month update plan is also optional.</div>
+</div>
+<div class="faq-item reveal">
+<div class="faq-q">Will I show up on Google? <span class="faq-icon">+</span></div>
+<div class="faq-a">Yes. We set up your Google Business Profile as part of every Standard build — that's what gets you on Google Maps and local search results.</div>
+</div>
+<div class="faq-item reveal">
+<div class="faq-q">Can you add online booking? <span class="faq-icon">+</span></div>
+<div class="faq-a">Yes — we integrate with Square (free) or Booksy for barbershops and salons. It's a $50 add-on. Clients book appointments directly from your site.</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="contact-section" id="contact">
+<div class="contact-inner reveal">
+<div class="contact-tag">Get in touch</div>
+<h2>Ready to get<br/><em>found online?</em></h2>
+<p class="contact-sub">Takes 5 minutes to get started. Your site is live within a week. Call, text, or email — we respond fast.</p>
+<div class="contact-row">
+<a href="tel:+12036709175" class="contact-btn contact-btn-white">📞 Call or text (203) 670-9175</a>
+<a href="/cdn-cgi/l/email-protection#1872776b7d6870747962796a772121212f587f75797174367b7775" class="contact-btn contact-btn-ghost">✉ Email us</a>
+</div>
+<div class="contact-info">
+(203) 670-9175 &nbsp;·&nbsp;
+<a href="/cdn-cgi/l/email-protection#ea8085998f9a82868b908b9885d3d3d3ddaa8d878b8386c4898587"><span class="__cf_email__" data-cfemail="107a7f637560787c716a71627f2929292750777d71797c3e737f7d">[email&#160;protected]</span></a>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="footer-logo">Launch<em>Local</em></div>
+<p>© 2025 Launch Local. Professional websites for local businesses.</p>
+<div class="footer-links">
+<a href="#how">Process</a>
+<a href="#pricing">Pricing</a>
+<a href="#contact">Contact</a>
+</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+
+const observer = new IntersectionObserver((entries) => {
+entries.forEach((e, i) => {
+if (e.isIntersecting) {
+setTimeout(() => e.target.classList.add(‘visible’), i * 80);
+observer.unobserve(e.target);
+}
+});
+}, { threshold: 0.08 });
+document.querySelectorAll(’.reveal’).forEach(el => observer.observe(el));
+
+document.querySelectorAll(’.faq
